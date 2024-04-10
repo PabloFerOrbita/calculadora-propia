@@ -48,7 +48,7 @@ function borrarUno() {
         }
         showNumero();
     } else {
-        mostrarOperacion.innerText = ' ';
+        mostrarOperacion.innerText = '';
         operacion = '';
     }
 }
