@@ -10,11 +10,14 @@ function cargarPagina(){
     operacion = '';
     resultado = 0;
     numero = 0;
+    mostrarResultado.innerText = 0;
     document.getElementById('sumar').addEventListener('click', sumar);
     document.getElementById('restar').addEventListener('click', restar);
     document.getElementById('dividir').addEventListener('click', dividir);
     document.getElementById('multiplicar').addEventListener('click', multiplicar);
     document.getElementById('igual').addEventListener('click', igual);
+    document.getElementById('borrar_actual').addEventListener('click', borrarActual);
+    document.getElementById('borrar_todo').addEventListener('click', borrarTodo);
     document.querySelectorAll('.numero').forEach(element => {
         element.addEventListener('click', setNumero);
         
@@ -23,7 +26,7 @@ function cargarPagina(){
 }
 
 function sumar(){
-    if ( numero != ''){
+    if ( numero !== ''){
     operar();
     
     }
@@ -33,13 +36,10 @@ function sumar(){
 
 }
 
-function igual(){
-    operar();
-   
-}
+
 
 function restar(){
-    if ( numero != ''){
+    if ( numero !== ''){
     operar();
     
     }
@@ -49,7 +49,7 @@ function restar(){
 }
 
 function multiplicar(){
-    if ( numero != ''){
+    if ( numero !== ''){
     operar();
     
     }
@@ -59,7 +59,7 @@ function multiplicar(){
 }
 
 function dividir(){
-    if ( numero != ''){
+    if ( numero !== ''){
     operar();
     
     
@@ -68,18 +68,31 @@ function dividir(){
     showOperacion();
 }
 
-function setNumero(e){
-
-    numero = numero + '' + this.value;
-    numero = parseInt(numero);
-    mostrarNumero();
-    
-}
-
 function borrarActual(){
     numero = 0;
+    showNumero();
+}
+
+function borrarTodo(){
+    operacion = '';
+    resultado = 0;
+    numero = 0;
+    mostrarOperacion.innerText = '';
+    showNumero();
     
 }
+
+function setNumero(e){
+    if (operacion == '='){
+        numero = 0;
+    }
+    numero = numero + '' + this.value;
+    numero = parseInt(numero);
+    showNumero();
+    
+}
+
+
 
 function operar(){
     switch(operacion){
@@ -96,9 +109,10 @@ function operar(){
         case '/':
             if (numero == 0){
                 mostrarResultado.innerText = 'No se puede dividir entre 0';
-            }
+            } else{
             resultado /= numero;
             showResultado();
+            }
             numero = '';
             break;
         case '*':
@@ -115,16 +129,19 @@ function operar(){
 }
 
 function igual() {
-    if (operacion != ''){
+    
+    if (operacion !== '' && operacion !== '='){
+    if (numero === ''){
+        numero = resultado;
+    }
     mostrarOperacion.innerText = resultado + ' ' + operacion + ' ' + numero + '=';
     operar();
-    operacion = '';
-    numero = 0;
+    operacion = '=';
     }
 }
 
-function mostrarNumero(){  
-    if (operacion == ''){
+function showNumero(){  
+    if (operacion === '='){
         resultado = 0;
         mostrarOperacion.innerText = '';
     }
