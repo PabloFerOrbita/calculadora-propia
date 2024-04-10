@@ -38,6 +38,8 @@ function sumar(){
 
 
 
+
+
 function restar(){
     if ( numero !== ''){
     operar();
