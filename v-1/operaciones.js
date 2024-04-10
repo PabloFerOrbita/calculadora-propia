@@ -48,7 +48,7 @@ function borrarUno() {
         }
         showNumero();
     } else {
-        mostrarOperacion.innerText = '';
+        mostrarOperacion.innerText = ' ';
         operacion = '';
     }
 }
@@ -101,6 +101,7 @@ function borrarTodo() {
 
 function setNumero(e) {
     if (operacion == '=') {
+        operacion = '';
         numero = 0;
     }
     numero = numero + '' + this.value;
@@ -158,7 +159,7 @@ function igual() {
 }
 
 function showNumero() {
-    if (operacion === '=') {
+    if (operacion === '=' || operacion === '') {
         resultado = 0;
         mostrarOperacion.innerText = '';
     }
