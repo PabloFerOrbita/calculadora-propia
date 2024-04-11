@@ -7,7 +7,7 @@ var mostrarResultado;
 function cargarPagina() {
     mostrarOperacion = document.getElementById('operacion');
     mostrarResultado = document.getElementById('resultado');
-    operacion = '';
+    operacion = 0;
     resultado = 0;
     numero = 0;
     mostrarResultado.innerText = 0;
@@ -43,13 +43,13 @@ function borrarUno() {
         if (numero.length > 1) {
             numero = numero.substr(0, numero.length - 1);
             numero = parseInt(numero);
-        } else{
+        } else {
             numero = 0
         }
         showNumero();
     } else {
         mostrarOperacion.innerText = '';
-        operacion = '';
+        operacion = 0;
     }
 }
 
@@ -91,7 +91,7 @@ function borrarActual() {
 }
 
 function borrarTodo() {
-    operacion = '';
+    operacion = 0;
     resultado = 0;
     numero = 0;
     mostrarOperacion.innerText = '';
@@ -100,8 +100,8 @@ function borrarTodo() {
 }
 
 function setNumero(e) {
-    if (operacion == '=') {
-        operacion = '';
+    if (operacion === '=' || mostrarResultado.innerText === 'No se puede dividir entre 0') {
+        operacion = 0;
         numero = 0;
     }
     numero = numero + '' + this.value;
@@ -148,7 +148,7 @@ function operar() {
 
 function igual() {
 
-    if (operacion !== '' && operacion !== '=') {
+    if (operacion !== 0 && operacion !== '=') {
         if (numero === '') {
             numero = resultado;
         }
@@ -159,7 +159,7 @@ function igual() {
 }
 
 function showNumero() {
-    if (operacion === '=' || operacion === '') {
+    if (operacion === '=' || operacion === 0) {
         resultado = 0;
         mostrarOperacion.innerText = '';
     }
